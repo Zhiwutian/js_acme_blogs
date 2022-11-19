@@ -8,9 +8,7 @@ const createElemWithText = (elem = "p", text = "", className) => {
 }
 
 const createSelectOptions = jsonData => {
-  if(!jsonData){
-    return;
-  }
+  if(!jsonData) return;
   const optionArray = jsonData.map(user => {
     const option = document.createElement('option');
     option.value = user.id;
@@ -21,9 +19,7 @@ const createSelectOptions = jsonData => {
 }
 
 const toggleCommentSection = postId => {
-  if(!postId){
-    return;
-  }
+  if(!postId) return;
   const sections = document.querySelectorAll('section');
   for (const element of sections){
     if(Number(element.getAttribute('data-post-id'))){
@@ -37,9 +33,7 @@ const toggleCommentSection = postId => {
 }
 
 const toggleCommentButton = postId => {
-  if(!postId){
-    return;
-  }
+  if(!postId) return;
   if(!document.querySelector(`[data-post-id="${postId}"]`)) {
     return null;
   }
@@ -49,9 +43,8 @@ const toggleCommentButton = postId => {
 }
 
 const deleteChildElements = parentElement => {
-  if(!(parentElement instanceof Element)){
-    return;
-  }
+  if(!(parentElement instanceof Element)) return;
+
   let child = parentElement.lastElementChild;
   while(child){
     parentElement.removeChild(child);
@@ -87,9 +80,7 @@ const removeButtonListeners = () => {
 }
 
 const createComments = jsonComments => {
-  if(!jsonComments){
-    return;
-  }
+  if(!jsonComments) return;
   const docFrag = document.createDocumentFragment();
   for (const comment of jsonComments){
     const article = document.createElement('article');
@@ -103,9 +94,7 @@ const createComments = jsonComments => {
 }
 
 const populateSelectMenu = jsonData => {
-  if(!jsonData){
-    return;
-  }
+  if(!jsonData) return;
   const selectMenu = document.getElementById('selectMenu');
   const optionArray = createSelectOptions(jsonData);
   for (const option of optionArray){
@@ -121,6 +110,17 @@ const getUsers = async () => {
 
     return await res.json();
   } catch (err) {
+    console.error(err);
+  }
+}
+
+const getUserPosts = async userId => {
+  if(!userId) return;
+  try {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    if(!res.ok) throw new Error('Status code not in 200 - 299 range');
+    return await res.json();
+  } catch {
     console.error(err);
   }
 }
