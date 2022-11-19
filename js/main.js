@@ -37,7 +37,7 @@ const toggleCommentButton = postId => {
   if(!document.querySelector(`[data-post-id="${postId}"]`)) {
     return null;
   }
-  const button = document.querySelector(`[data-post-id="${postId}"]`);
+  const button = document.querySelector(`button[data-post-id="${postId}"]`);
   button.textContent === "Show Comments" ? button.textContent = "Hide Comments" : button.textContent = "Show Comments";
   return button;
 }
@@ -196,5 +196,9 @@ const displayPosts = async postData => {
 
 
 const toggleComments = (event, postId) => {
-  return true;
+  if (!event || !postId) return;
+  event.target.listener = true;
+  const section = toggleCommentSection(postId);
+  const button = toggleCommentButton(postId);
+  return [section, button];
 }
