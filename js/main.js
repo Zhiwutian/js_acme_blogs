@@ -117,7 +117,7 @@ const getUsers = async () => {
 const getUserPosts = async userId => {
   if(!userId) return;
   try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
     if(!res.ok) throw new Error('Status code not in 200 - 299 range');
     return await res.json();
   } catch {
@@ -128,7 +128,18 @@ const getUserPosts = async userId => {
 const getUser = async userId => {
   if(!userId) return;
   try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+    if(!res.ok) throw new Error('Status code not in 200 - 299 range');
+    return await res.json();
+  } catch {
+    console.error(err);
+  }
+}
+
+const getPostComments = async postId => {
+  if(!postId) return;
+  try {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
     if(!res.ok) throw new Error('Status code not in 200 - 299 range');
     return await res.json();
   } catch {
