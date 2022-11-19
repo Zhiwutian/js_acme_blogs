@@ -32,9 +32,9 @@ const toggleCommentSection = postId => {
   return null;
 }
 
-const toggleCommentButton = postId => {
+const toggleCommentButton = postId => { // note
   if(!postId) return;
-  if(!document.querySelector(`[data-post-id="${postId}"]`)) {
+  if(!document.querySelector(`button[data-post-id="${postId}"]`)) {
     return null;
   }
   const button = document.querySelector(`button[data-post-id="${postId}"]`);
@@ -201,4 +201,13 @@ const toggleComments = (event, postId) => {
   const section = toggleCommentSection(postId);
   const button = toggleCommentButton(postId);
   return [section, button];
+}
+
+const refreshPosts = async jsonPosts => {
+  if(!jsonPosts) return;
+  const removedButtons = removeButtonListeners();
+  const main = deleteChildElements(document.querySelector('main'));
+  const fragment = await displayPosts(jsonPosts);
+  const addedButtons = addButtonListeners();
+  return [removedButtons, main, fragment, addedButtons];
 }
