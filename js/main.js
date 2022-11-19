@@ -124,6 +124,17 @@ const getUserPosts = async userId => {
     console.error(err);
   }
 }
+
+const getUser = async userId => {
+  if(!userId) return;
+  try {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+    if(!res.ok) throw new Error('Status code not in 200 - 299 range');
+    return await res.json();
+  } catch {
+    console.error(err);
+  }
+}
 const toggleComments = (event, postId) => {
   return true;
 }
