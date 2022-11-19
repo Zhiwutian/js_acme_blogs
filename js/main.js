@@ -157,6 +157,33 @@ const displayComments = async postId => {
   section.append(fragment);
   return section;
 }
+
+const createPosts = async jsonData => {
+  if(!jsonData) return;
+  const fragment = document.createDocumentFragment();
+  for (const post of jsonData) {
+    const article = document.createElement('article');
+    const h2 = document.createElement('h2');
+    h2.textContent = post.title;
+    const p1 = document.createElement('p');
+    p1.textContent = post.body;
+    const p2 = document.createElement('p');
+    p2.textContent = `Post ID: ${post.id}`;
+    const author = await getUser(post.userId);
+    const p3 = document.createElement('p');
+    p3.textContent = `Author: ${author.name} with ${author.company.name}`;
+    const p4 = document.createElement('p');
+    p4.textContent = author.company.catchPhrase;
+    const button = document.createElement('button');
+    button.textContent = 'Show Comments';
+    button.dataset.postId = post.id;
+    article.append(h2, p1, p2, p3, p4, button);
+    const section = await displayComments(post.id);
+    article.append(section);
+    fragment.append(article);
+  }
+  return fragment;
+}
 const toggleComments = (event, postId) => {
   return true;
 }
