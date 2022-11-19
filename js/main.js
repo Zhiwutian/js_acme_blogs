@@ -184,6 +184,17 @@ const createPosts = async jsonData => {
   }
   return fragment;
 }
+
+const displayPosts = async postData => {
+  const mainElem = document.querySelector('main');
+  const element = postData ?
+  await createPosts(postData) :
+  document.querySelector('.default-text').cloneNode(true);
+  mainElem.append(element);
+  return element;
+}
+
+
 const toggleComments = (event, postId) => {
   return true;
 }
