@@ -211,3 +211,29 @@ const refreshPosts = async jsonPosts => {
   const addedButtons = addButtonListeners();
   return [removedButtons, main, fragment, addedButtons];
 }
+
+const selectMenuChangeEventHandler = async event => {
+  event.target.disabled = true;
+  const userId = event.target.value || 1;
+  const postData = await getUserPosts(userId);
+  const refreshedPosts = await refreshPosts(postData);
+  event.target.disabled = false;
+  return [userId, postData,refreshedPosts];
+
+}
+
+const initPage = async () => {
+  const users = await getUsers();
+  const select = populateSelectMenu(users);
+  return [users, select];
+}
+
+const initApp = async () => {
+  const select = document.getElementById('selectMenu');
+  select.addEventListener('change', selectMenuChangeEventHandler);
+
+}
+
+document.addEventListener('DomContentLoaded', event => {
+  initApp();
+})
