@@ -213,6 +213,7 @@ const refreshPosts = async jsonPosts => {
 }
 
 const selectMenuChangeEventHandler = async event => {
+  console.log(event);
   event.target.disabled = true;
   const userId = event.target.value || 1;
   const postData = await getUserPosts(userId);
@@ -229,11 +230,12 @@ const initPage = async () => {
 }
 
 const initApp = async () => {
+  initPage();
   const select = document.getElementById('selectMenu');
   select.addEventListener('change', selectMenuChangeEventHandler);
 
 }
 
-document.addEventListener('DomContentLoaded', event => {
+document.addEventListener('DOMContentLoaded', event => {
   initApp();
 })
