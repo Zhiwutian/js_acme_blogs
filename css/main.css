@@ -21,7 +21,7 @@ select {
     --MAIN-BGCOLOR: #FFF;
     --MAIN-FONT-COLOR: #333;
     --MAIN-BORDER: #333;
-    --POST-BGCOLOR: #FFF; 
+    --POST-BGCOLOR: #FFF;
     --BUTTON-BGCOLOR: #333;
     --BUTTON-COLOR: #FFF;
     --BOX-SHADOW: rgb(0,0,0,0.5);
@@ -33,9 +33,9 @@ select {
         --HEAD-FOOT-BGCOLOR: #1a1a1a;
         --MAIN-BGCOLOR: #21262d;
         --MAIN-FONT-COLOR: #FFF;
-        --POST-BGCOLOR: #2b323b; 
+        --POST-BGCOLOR: #2b323b;
     }
-} 
+}
 
 /* || UTILITY CLASSES */
 
@@ -64,6 +64,7 @@ header, footer {
     width: 100%;
     padding: 1rem;
     position: sticky;
+    z-index: 1;
 }
 
 header {

@@ -213,12 +213,13 @@ const refreshPosts = async jsonPosts => {
 }
 
 const selectMenuChangeEventHandler = async event => {
-  console.log(event);
-  event.target.disabled = true;
-  const userId = event.target.value || 1;
+  if(!event) return;
+  const select = document.getElementById('selectMenu');
+  select.disabled = true;
+  const userId = event?.target?.value || 1;
   const postData = await getUserPosts(userId);
   const refreshedPosts = await refreshPosts(postData);
-  event.target.disabled = false;
+  select.disabled = false;
   return [userId, postData,refreshedPosts];
 
 }
